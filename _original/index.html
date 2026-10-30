@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Croissanterie · Authentic French Bakery in Mill Bay, BC</title>
+<meta name="description" content="La Croissanterie is an authentic French bakery in Mill Bay, British Columbia. Hand-laminated croissants, pain au chocolat and Nordic cinnamon buns, baked fresh each morning.">
+<meta name="theme-color" content="#F7F1E6">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 28'%3E%3Cpath d='M5 21C3 15 8 8 15 6.5c3-.7 7-.7 10 0C32 8 37 15 35 21c-1 2-4 1.5-5 0-2-3-6-4.5-10-4.5S12 18 10 21c-1 1.5-4 2-5 0z' fill='%23C8923A'/%3E%3C/svg%3E">
+
+<!-- Fonts: high-contrast serif for display, humanist sans for body -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script>document.documentElement.classList.add('js');</script>
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Bakery",
+  "name": "La Croissanterie",
+  "description": "Authentic French bakery",
+  "servesCuisine": "French",
+  "telephone": "+1-250-929-7277",
+  "priceRange": "$1–10",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "2490 Trans-Canada Hwy",
+    "addressLocality": "Mill Bay",
+    "addressRegion": "BC",
+    "postalCode": "V8H 1B5",
+    "addressCountry": "CA"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "bestRating": "5",
+    "reviewCount": "21"
+  }
+}
+</script>
+
+<style>
+/* ==========================================================================
+   1. Design tokens
+   ========================================================================== */
+:root {
+  /* Colour */
+  --cream:        #F7F1E6;
+  --parchment:    #EFE5D3;
+  --parchment-2:  #E7D9C1;
+  --espresso:     #2B1D14;
+  --espresso-2:   #5A4636;   /* secondary text */
+  --gold:         #C8923A;   /* decorative strokes, accents */
+  --gold-deep:    #8C5F17;   /* gold for small text (AA on cream) */
+  --gold-soft:    rgba(200, 146, 58, .14);
+  --blue:         #5E7591;   /* muted French blue, used sparingly */
+  --blue-soft:    rgba(94, 117, 145, .14);
+  --sage:         #6F8364;
+  --rouge:        #9A4B3A;
+  --hairline:     rgba(43, 29, 20, .14);
+  --shadow-warm:  0 24px 48px -24px rgba(110, 70, 20, .35), 0 8px 18px -10px rgba(110, 70, 20, .18);
+
+  /* Type */
+  --font-serif: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  --font-sans:  "Jost", "Avenir Next", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Layout */
+  --gutter: 1.25rem;
+  --maxw: 1200px;
+  --header-h: 72px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(.22, .61, .36, 1);
+  --dur: 800ms;
+}
+@media (min-width: 768px) { :root { --gutter: 2.5rem; } }
+
+/* ==========================================================================
+   2. Base
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--espresso);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+/* Paper grain: SVG fractal-noise filter tiled over the whole page */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 200;
+  opacity: .32;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .17 0 0 0 0 .11 0 0 0 0 .07 0 0 0 .45 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -.01em;
+  margin: 0;
+}
+h1 em, h2 em, h3 em { font-style: italic; font-weight: 400; color: var(--gold-deep); }
+p { margin: 0 0 1em; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+::selection { background: var(--gold-soft); }
+
+.sr-only {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: absolute; left: 1rem; top: -100px; z-index: 300;
+  background: var(--espresso); color: var(--cream); padding: .6rem 1rem; text-decoration: none;
+}
+.skip-link:focus { top: 1rem; }
+
+.container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
+
+/* Small uppercase labels with generous tracking */
+.label {
+  display: inline-flex; align-items: center; gap: .75rem;
+  font-family: var(--font-sans);
+  font-size: .72rem; font-weight: 500;
+  letter-spacing: .28em; text-transform: uppercase;
+  color: var(--gold-deep);
+}
+.label::before { content: ""; width: 28px; height: 1px; background: currentColor; opacity: .6; }
+.label--plain::before { display: none; }
+
+.hairline { border: 0; height: 1px; background: var(--hairline); margin: 0; }
+
+/* SVG line-art defaults */
+.art { fill: none; stroke: var(--gold); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.art .ink   { stroke: var(--espresso); }
+.art .fine  { stroke-width: 1; opacity: .75; }
+.art .fillg { fill: var(--gold); fill-opacity: 0; stroke: none; }
+.art .choc  { fill: var(--espresso); fill-opacity: 0; stroke: var(--espresso); }
+
+/* ==========================================================================
+   3. Buttons
+   ========================================================================== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  min-height: 48px; padding: .8rem 1.6rem;
+  font-family: var(--font-sans); font-size: .78rem; font-weight: 500;
+  letter-spacing: .2em; text-transform: uppercase; text-decoration: none;
+  border: 1px solid var(--espresso); border-radius: 999px;
+  transition: background-color 450ms var(--ease-out), color 450ms var(--ease-out),
+              border-color 450ms var(--ease-out), transform 450ms var(--ease-out);
+  cursor: pointer;
+}
+.btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+.btn--solid { background: var(--espresso); color: var(--cream); }
+.btn--solid:hover { background: var(--gold-deep); border-color: var(--gold-deep); }
+.btn--ghost { background: transparent; color: var(--espresso); }
+.btn--ghost:hover { background: var(--espresso); color: var(--cream); }
+.btn:active { transform: translateY(1px); }
+
+/* ==========================================================================
+   4. Header / navigation
+   ========================================================================== */
+.site-header {
+  position: fixed; inset: 0 0 auto 0; z-index: 100;
+  height: var(--header-h);
+  transition: background-color 500ms var(--ease-out), box-shadow 500ms var(--ease-out), backdrop-filter 500ms;
+}
+.site-header.is-scrolled {
+  background: rgba(247, 241, 230, .92);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 var(--hairline), 0 10px 30px -18px rgba(43, 29, 20, .35);
+}
+.nav { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+
+.brand { display: inline-flex; align-items: center; gap: .65rem; text-decoration: none; color: var(--espresso); }
+.brand svg { width: 38px; height: 27px; }
+.brand-name { font-family: var(--font-serif); font-size: 1.45rem; font-weight: 500; letter-spacing: .01em; line-height: 1; }
+.brand-name small { display: block; font-family: var(--font-sans); font-size: .56rem; letter-spacing: .32em; text-transform: uppercase; color: var(--gold-deep); margin-top: .3rem; font-weight: 500; }
+
+.nav-toggle {
+  position: relative; z-index: 120;
+  width: 48px; height: 48px; margin-right: -10px;
+  display: grid; place-items: center;
+  background: none; border: 0; color: var(--espresso); cursor: pointer;
+}
+.nav-toggle span, .nav-toggle span::before, .nav-toggle span::after {
+  display: block; width: 24px; height: 1.5px; background: currentColor;
+  transition: transform 450ms var(--ease-out), opacity 300ms;
+}
+.nav-toggle span { position: relative; }
+.nav-toggle span::before, .nav-toggle span::after { content: ""; position: absolute; left: 0; }
+.nav-toggle span::before { top: -7px; }
+.nav-toggle span::after  { top:  7px; width: 16px; }
+.nav-open .nav-toggle span { background: transparent; }
+.nav-open .nav-toggle span::before { transform: translateY(7px) rotate(45deg); }
+.nav-open .nav-toggle span::after  { transform: translateY(-7px) rotate(-45deg); width: 24px; }
+
+/* Mobile slide-in panel */
+.nav-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 110;
+  width: min(84vw, 360px);
+  padding: calc(var(--header-h) + 2rem) 2rem 2rem;
+  background: var(--cream);
+  box-shadow: -20px 0 60px -30px rgba(43, 29, 20, .5);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform 600ms var(--ease-out), visibility 0s linear 600ms;
+  display: flex; flex-direction: column;
+}
+.nav-open .nav-panel { transform: none; visibility: visible; transition: transform 600ms var(--ease-out), visibility 0s; }
+.nav-scrim {
+  position: fixed; inset: 0; z-index: 105; background: rgba(43, 29, 20, .3);
+  opacity: 0; pointer-events: none; transition: opacity 500ms var(--ease-out);
+}
+.nav-open .nav-scrim { opacity: 1; pointer-events: auto; }
+.nav-list { list-style: none; margin: 0; padding: 0; }
+.nav-list li { border-bottom: 1px solid var(--hairline); }
+.nav-list a {
+  position: relative; display: block; padding: 1rem 0;
+  font-family: var(--font-serif); font-size: 1.9rem; text-decoration: none;
+}
+.nav-panel-foot { margin-top: auto; font-size: .9rem; color: var(--espresso-2); }
+.nav-panel-foot a { color: var(--espresso); }
+
+@media (min-width: 900px) {
+  .nav-toggle, .nav-scrim, .nav-panel-foot { display: none; }
+  .nav-panel {
+    position: static; width: auto; padding: 0; background: none; box-shadow: none;
+    transform: none; visibility: visible; transition: none;
+  }
+  .nav-list { display: flex; gap: 2.6rem; }
+  .nav-list li { border: 0; }
+  .nav-list a {
+    padding: .4rem 0;
+    font-family: var(--font-sans); font-size: .74rem; font-weight: 500;
+    letter-spacing: .24em; text-transform: uppercase;
+  }
+  /* Underline grows from the centre */
+  .nav-list a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+    background: var(--gold); transform: scaleX(0); transform-origin: center;
+    transition: transform 450ms var(--ease-out);
+  }
+  .nav-list a:hover::after, .nav-list a:focus-visible::after { transform: scaleX(1); }
+}
+
+/* ==========================================================================
+   5. Hero
+   ========================================================================== */
+.hero {
+  position: relative;
+  padding: calc(var(--header-h) + 2.5rem) 0 4rem;
+  overflow: hidden;
+}
+/* Soft warm glow behind the pastry */
+.hero::before {
+  content: ""; position: absolute; z-index: -1;
+  width: 70vmax; height: 70vmax; right: -25vmax; top: -10vmax;
+  background: radial-gradient(closest-side, rgba(200, 146, 58, .16), transparent 70%);
+}
+.hero-grid { display: grid; gap: 2.5rem; align-items: center; }
+.hero h1 { font-size: clamp(3rem, 12vw, 6.4rem); margin: 1.2rem 0 1.4rem; }
+.hero h1 em { display: block; }
+.hero-lead { max-width: 30rem; font-size: 1.1rem; color: var(--espresso-2); }
+.hero-lead strong { font-weight: 400; color: var(--espresso); }
+
+.rating-badge {
+  display: inline-flex; align-items: center; gap: .8rem; flex-wrap: wrap;
+  margin: .6rem 0 2rem; padding: .55rem 1.1rem .55rem .9rem;
+  border: 1px solid var(--hairline); border-radius: 999px;
+  background: rgba(255, 255, 255, .35);
+  text-decoration: none; font-size: .88rem;
+  transition: border-color 450ms var(--ease-out), background-color 450ms var(--ease-out);
+}
+.rating-badge:hover { border-color: var(--gold); background: rgba(255, 255, 255, .6); }
+.rating-badge b { font-family: var(--font-serif); font-size: 1.35rem; font-weight: 600; line-height: 1; }
+.rating-badge span { color: var(--espresso-2); }
+
+.stars { display: inline-flex; gap: 2px; }
+.stars svg { width: 15px; height: 15px; fill: var(--gold); }
+
+.hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; }
+.hero-note {
+  margin-top: 2.2rem; font-family: var(--font-serif); font-style: italic; font-size: 1.15rem; color: var(--espresso-2);
+  display: flex; align-items: center; gap: .8rem;
+}
+.hero-note::before { content: ""; width: 40px; height: 1px; background: var(--gold); }
+
+.hero-art { position: relative; max-width: 560px; width: 100%; margin: 0 auto; }
+.hero-art svg { width: 100%; height: auto; overflow: visible; }
+.hero-art .art { stroke-width: 2; }
+.hero-art .fine { stroke-width: 1.2; }
+.hero-caption {
+  position: absolute; right: 4%; bottom: 2%;
+  font-family: var(--font-serif); font-style: italic; font-size: 1rem; color: var(--gold-deep);
+}
+
+/* Stroke draw on load (pathLength="1" normalises every path) */
+.hero-art .draw {
+  stroke-dasharray: 1; stroke-dashoffset: 1;
+  animation: draw 900ms var(--ease-out) forwards;
+  animation-delay: calc(200ms + var(--i, 0) * 110ms);
+}
+.hero-art .fillg { animation: fill-in 900ms var(--ease-out) 1.5s forwards; }
+.hero-art .shadow { opacity: 0; animation: fade-in 900ms var(--ease-out) 1.2s forwards; }
+@keyframes draw    { to { stroke-dashoffset: 0; } }
+@keyframes fill-in { to { fill-opacity: .16; } }
+@keyframes fade-in { to { opacity: 1; } }
+
+/* Steam wisps rising from the pastry */
+.steam path {
+  stroke: var(--espresso-2); stroke-width: 1.3; opacity: 0;
+  animation: steam 5.5s ease-in-out infinite;
+}
+.steam path:nth-child(2) { animation-delay: 1.8s; }
+.steam path:nth-child(3) { animation-delay: 3.6s; }
+@keyframes steam {
+  0%   { opacity: 0;   transform: translateY(14px); }
+  30%  { opacity: .45; }
+  70%  { opacity: .2; }
+  100% { opacity: 0;   transform: translateY(-26px); }
+}
+/* Gentle float on the whole pastry */
+.float { animation: float 7s ease-in-out infinite; transform-origin: center; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+@media (min-width: 960px) {
+  .hero { min-height: 100vh; display: flex; align-items: center; padding-bottom: 5rem; }
+  .hero-grid { grid-template-columns: 1.05fr .95fr; gap: 3rem; }
+}
+
+/* ==========================================================================
+   6. Section shells & dividers
+   ========================================================================== */
+.section { padding: 5.5rem 0; position: relative; }
+@media (min-width: 900px) { .section { padding: 8rem 0; } }
+.section-head { margin-bottom: 3rem; }
+.section-head h2 { font-size: clamp(2.4rem, 7vw, 4.2rem); margin-top: 1rem; }
+
+.wheat-divider { display: flex; justify-content: center; padding: 0 var(--gutter); }
+.wheat-divider svg { width: min(320px, 80%); height: auto; }
+
+/* ==========================================================================
+   7. Our Craft
+   ========================================================================== */
+.craft-grid { display: grid; gap: 3rem; }
+.craft-copy p { color: var(--espresso-2); max-width: 34rem; }
+.craft-copy .dropcap::first-letter {
+  float: left; font-family: var(--font-serif); font-size: 4.4rem; line-height: .8;
+  padding: .35rem .6rem 0 0; color: var(--gold-deep);
+}
+.craft-aside {
+  position: relative; align-self: start;
+  padding: 2.2rem 2rem; border: 1px solid var(--hairline);
+  background: linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,0));
+}
+.craft-aside svg { width: 180px; margin: 0 auto 1.2rem; }
+.craft-aside blockquote {
+  margin: 0; text-align: center;
+  font-family: var(--font-serif); font-style: italic; font-size: 1.5rem; line-height: 1.3;
+}
+.craft-aside blockquote span { display: block; margin-top: .6rem; font-family: var(--font-sans); font-style: normal; font-size: .7rem; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-deep); }
+
+.pillars {
+  list-style: none; padding: 0; margin: 4rem 0 0;
+  display: grid; gap: 0; border-top: 1px solid var(--hairline);
+}
+.pillar { padding: 2rem 0; border-bottom: 1px solid var(--hairline); display: grid; grid-template-columns: 56px 1fr; gap: 1.2rem; align-items: start; }
+.pillar svg { width: 52px; height: 52px; }
+.pillar h3 { font-size: 1.6rem; margin-bottom: .35rem; }
+.pillar p { margin: 0; color: var(--espresso-2); font-size: .98rem; }
+
+@media (min-width: 900px) {
+  .craft-grid { grid-template-columns: 1.3fr .8fr; gap: 6rem; }
+  .craft-aside { margin-top: 5rem; }
+  .pillars { grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--hairline); }
+  .pillar { grid-template-columns: 1fr; border-bottom: 0; padding: 2.5rem 2.2rem 2.5rem 0; }
+  .pillar + .pillar { border-left: 1px solid var(--hairline); padding-left: 2.2rem; }
+}
+
+/* ==========================================================================
+   8. Menu
+   ========================================================================== */
+.menu { background: var(--parchment); }
+.menu::before, .menu::after { /* deckled hairline edges */
+  content: ""; position: absolute; left: 0; right: 0; height: 1px; background: var(--hairline);
+}
+.menu::before { top: 0; } .menu::after { bottom: 0; }
+.menu-head { display: grid; gap: 1.5rem; align-items: end; }
+.menu-note {
+  display: inline-flex; align-items: center; gap: .6rem; margin: 0;
+  font-size: .92rem; color: var(--espresso-2);
+}
+.menu-note svg { width: 20px; height: 20px; flex: none; }
+@media (min-width: 900px) { .menu-head { grid-template-columns: 1fr auto; } }
+
+.menu-grid { display: grid; gap: 1.5rem; list-style: none; padding: 0; margin: 0; }
+.card {
+  position: relative; display: flex; flex-direction: column;
+  background: var(--cream);
+  border: 1px solid var(--hairline);
+  padding: 2rem 1.8rem 1.8rem;
+  transition: transform 600ms var(--ease-out), box-shadow 600ms var(--ease-out), border-color 600ms var(--ease-out);
+}
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-warm); border-color: rgba(200, 146, 58, .45); }
+.card-art {
+  display: grid; place-items: center; height: 170px; margin-bottom: 1.4rem;
+  background: radial-gradient(closest-side, var(--gold-soft), transparent 75%);
+}
+.card-art svg { width: 78%; max-width: 240px; height: auto; transition: transform 700ms var(--ease-out); }
+.card:hover .card-art svg { transform: rotate(-4deg) scale(1.03); }
+.card .fr { font-family: var(--font-serif); font-style: italic; font-size: 1.05rem; color: var(--gold-deep); margin: 0 0 .2rem; }
+.card h3 { font-size: 1.85rem; margin-bottom: .7rem; }
+.card p.desc { color: var(--espresso-2); font-size: .97rem; flex: 1; }
+.card-foot {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-top: 1rem; margin-top: .4rem; border-top: 1px solid var(--hairline);
+  font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--espresso-2);
+}
+.price { font-family: var(--font-serif); font-size: 1.25rem; letter-spacing: 0; text-transform: none; color: var(--espresso); }
+/* Placeholder marker for content the owner still needs to fill in */
+.ph {
+  display: inline-block; padding: 0 .35em; border-bottom: 1px dashed var(--gold);
+  background: var(--gold-soft); color: var(--gold-deep);
+}
+.card .tag {
+  position: absolute; top: 1.1rem; right: 1.1rem;
+  font-size: .62rem; letter-spacing: .24em; text-transform: uppercase; font-weight: 500;
+  color: var(--blue); border: 1px solid currentColor; border-radius: 999px; padding: .2rem .65rem;
+}
+
+@media (min-width: 640px) { .menu-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) {
+  .menu-grid { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+  /* Featured card spans two columns, laid out horizontally */
+  .card--feature { grid-column: span 2; display: grid; grid-template-columns: 1.1fr 1fr; gap: 2rem; align-items: center; padding: 2.5rem; }
+  .card--feature .card-art { height: 100%; min-height: 260px; margin: 0; }
+  .card--feature .card-body { display: flex; flex-direction: column; height: 100%; }
+  .card--feature h3 { font-size: 2.6rem; }
+}
+
+/* ==========================================================================
+   9. Reviews
+   ========================================================================== */
+.reviews { text-align: center; }
+.reviews .section-head { margin-bottom: 2rem; }
+.review-summary {
+  display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .6rem 1.4rem;
+  font-size: .9rem; color: var(--espresso-2); margin-bottom: 3.5rem;
+}
+.review-summary .score { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 600; color: var(--espresso); line-height: 1; }
+.review-summary .sep { width: 1px; height: 22px; background: var(--hairline); }
+.review-summary .stars svg { width: 18px; height: 18px; }
+
+.carousel { position: relative; max-width: 900px; margin: 0 auto; }
+.carousel:focus-visible { outline-offset: 12px; }
+.quote-mark { width: 54px; height: 40px; margin: 0 auto 1.2rem; fill: var(--gold); opacity: .55; }
+.slides { display: grid; }
+.slide {
+  grid-area: 1 / 1; margin: 0;
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  /* Outgoing quote fades quickly; the incoming one waits, so text never overlaps */
+  transition: opacity 450ms ease-out, transform 450ms ease-out, visibility 0s linear 450ms;
+}
+.slide.is-active {
+  opacity: 1; visibility: visible; transform: none;
+  transition: opacity 900ms var(--ease-out) 400ms, transform 900ms var(--ease-out) 400ms, visibility 0s;
+}
+.slide blockquote { margin: 0; }
+.slide blockquote p {
+  font-family: var(--font-serif); font-style: italic; font-weight: 400;
+  font-size: clamp(1.75rem, 5.2vw, 3.1rem); line-height: 1.2; margin: 0 0 1.6rem;
+  text-wrap: balance;
+}
+.slide figcaption { font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-deep); font-weight: 500; }
+.slide figcaption::before { content: "— "; }
+
+.carousel-controls { display: flex; justify-content: center; align-items: center; gap: 1.2rem; margin-top: 2.6rem; }
+.arrow {
+  width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid var(--hairline); background: none; color: var(--espresso); cursor: pointer;
+  transition: border-color 450ms var(--ease-out), background-color 450ms var(--ease-out);
+}
+.arrow:hover { border-color: var(--gold); background: rgba(255,255,255,.5); }
+.arrow svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+.dots { display: flex; gap: .2rem; }
+.dot {
+  width: 32px; height: 32px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center;
+}
+.dot::before {
+  content: ""; width: 8px; height: 8px; border-radius: 50%;
+  border: 1px solid var(--gold-deep); transition: background-color 450ms var(--ease-out), transform 450ms var(--ease-out);
+}
+.dot[aria-current="true"]::before { background: var(--gold-deep); transform: scale(1.15); }
+
+/* ==========================================================================
+   10. Visit
+   ========================================================================== */
+.visit { background: var(--parchment); }
+.visit::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--hairline); }
+.visit-grid { display: grid; gap: 3rem; }
+.visit-info { display: grid; gap: 2rem; align-content: start; }
+
+.info-row { display: grid; grid-template-columns: 28px 1fr; gap: 1rem; align-items: start; }
+.info-row svg { width: 26px; height: 26px; margin-top: .2rem; }
+.info-row h3 { font-family: var(--font-sans); font-size: .7rem; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: .35rem; }
+.info-row address, .info-row p { font-style: normal; margin: 0; font-size: 1.05rem; }
+.tel { font-family: var(--font-serif); font-size: 1.7rem; font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--gold); transition: color 450ms var(--ease-out); }
+.tel:hover { color: var(--gold-deep); }
+
+/* Open / closed indicator */
+.status {
+  display: inline-flex; align-items: center; gap: .65rem;
+  padding: .5rem 1rem; border-radius: 999px; border: 1px solid var(--hairline);
+  background: rgba(255,255,255,.4); font-size: .9rem; font-weight: 400;
+}
+.status-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--espresso-2); position: relative; }
+.status.is-open    .status-dot { background: var(--sage); }
+.status.is-closed  .status-dot { background: var(--rouge); }
+.status.is-unknown .status-dot { background: var(--gold); }
+.status.is-open .status-dot::after {
+  content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid var(--sage);
+  animation: pulse 2.4s ease-out infinite;
+}
+@keyframes pulse { from { transform: scale(.6); opacity: .9; } to { transform: scale(1.6); opacity: 0; } }
+
+.hours-wrap { border: 1px solid var(--hairline); background: var(--cream); padding: 1.4rem 1.4rem 1rem; }
+.hours-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: .6rem; }
+.hours-head h3 { font-size: 1.6rem; }
+.ph-badge {
+  font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 500;
+  color: var(--blue); background: var(--blue-soft); padding: .3rem .7rem; border-radius: 999px;
+}
+.hours { width: 100%; border-collapse: collapse; font-size: .97rem; }
+.hours th, .hours td { padding: .6rem 0; border-bottom: 1px solid var(--hairline); text-align: left; font-weight: 300; }
+.hours tr:last-child th, .hours tr:last-child td { border-bottom: 0; }
+.hours td { text-align: right; font-variant-numeric: tabular-nums; }
+.hours tr.is-today th, .hours tr.is-today td { font-weight: 500; }
+.hours tr.is-today th::after { content: "Today"; margin-left: .6rem; font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-deep); vertical-align: middle; }
+.hours-note { font-size: .82rem; color: var(--espresso-2); margin: .9rem 0 0; }
+
+.visit-actions { display: flex; flex-wrap: wrap; gap: .8rem; }
+
+/* Stylised map card */
+.map-card {
+  position: relative; display: block; text-decoration: none;
+  border: 1px solid var(--hairline); background: var(--cream); padding: .8rem;
+  box-shadow: var(--shadow-warm);
+  transition: transform 600ms var(--ease-out);
+}
+.map-card:hover { transform: translateY(-4px) rotate(-.4deg); }
+.map-card svg { width: 100%; height: auto; }
+.map-card .map-caption {
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  padding: .9rem .4rem .2rem; font-size: .7rem; letter-spacing: .24em; text-transform: uppercase; color: var(--espresso-2);
+}
+.map-card .map-caption span:last-child { color: var(--gold-deep); }
+.map-pin-ring { transform-origin: 200px 132px; animation: ring 3s ease-out infinite; }
+@keyframes ring { from { transform: scale(.4); opacity: .8; } to { transform: scale(1.8); opacity: 0; } }
+
+@media (min-width: 900px) {
+  .visit-grid { grid-template-columns: 1fr 1.05fr; gap: 5rem; align-items: start; }
+  .map-card { margin-top: 3.5rem; }
+}
+
+/* ==========================================================================
+   11. Footer
+   ========================================================================== */
+.site-footer { background: var(--espresso); color: var(--parchment); padding: 4.5rem 0 2rem; position: relative; z-index: 1; }
+.site-footer a { color: var(--parchment); }
+.footer-grid { display: grid; gap: 2.5rem; }
+.site-footer .brand { color: var(--cream); }
+.site-footer .brand-name small { color: var(--gold); }
+.footer-col h3 { font-family: var(--font-sans); font-size: .68rem; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: .8rem; }
+.footer-col address, .footer-col p { font-style: normal; margin: 0; font-size: .97rem; color: rgba(239, 229, 211, .82); }
+.footer-col a { text-decoration: none; border-bottom: 1px solid rgba(200,146,58,.5); }
+.footer-col a:hover { border-color: var(--gold); }
+.footer-sign { font-family: var(--font-serif); font-style: italic; font-size: 1.6rem; color: var(--cream); }
+.footer-bottom {
+  margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(239, 229, 211, .14);
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: .6rem;
+  font-size: .78rem; color: rgba(239, 229, 211, .6); letter-spacing: .04em;
+}
+@media (min-width: 800px) { .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; } }
+
+/* ==========================================================================
+   12. Scroll reveals (only hidden when JS is running)
+   ========================================================================== */
+.js .reveal {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+  transition-delay: var(--d, 0ms);
+}
+.js .reveal.is-visible { opacity: 1; transform: none; }
+/* Icons inside revealed blocks draw themselves */
+.js .reveal .draw {
+  stroke-dasharray: 1; stroke-dashoffset: 1;
+  transition: stroke-dashoffset 900ms var(--ease-out);
+  transition-delay: calc(var(--d, 0ms) + 200ms + var(--i, 0) * 70ms);
+}
+.js .reveal.is-visible .draw { stroke-dashoffset: 0; }
+.js .reveal .fillg, .js .reveal .choc { transition: fill-opacity 900ms var(--ease-out) calc(var(--d, 0ms) + 700ms); }
+.js .reveal.is-visible .fillg { fill-opacity: .16; }
+.js .reveal.is-visible .choc  { fill-opacity: .85; }
+.fillg.static { fill-opacity: .16; }
+html:not(.js) .choc { fill-opacity: .85; }
+
+/* ==========================================================================
+   13. Reduced motion: no movement, everything shown in its final state
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; }
+  .js .reveal { opacity: 1; transform: none; }
+  .draw, .js .reveal .draw, .hero-art .draw { stroke-dashoffset: 0 !important; }
+  .hero-art .fillg, .js .reveal .fillg { fill-opacity: .16; }
+  .js .reveal .choc { fill-opacity: .85; }
+  .hero-art .shadow { opacity: 1; }
+  .steam path { opacity: .25; }
+  .card:hover, .map-card:hover { transform: none; }
+  .card:hover .card-art svg { transform: none; }
+}
+</style>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- =====================================================================
+     Header / navigation
+     ===================================================================== -->
+<header class="site-header" id="top">
+  <nav class="nav container" aria-label="Main">
+    <a class="brand" href="#top" aria-label="La Croissanterie, back to top">
+      <!-- Crescent croissant logo mark -->
+      <svg viewBox="0 0 40 28" class="art" aria-hidden="true">
+        <path d="M5 21C3 15 8 8 15 6.5c3-.7 7-.7 10 0C32 8 37 15 35 21c-1 2-4 1.5-5 0-2-3-6-4.5-10-4.5S12 18 10 21c-1 1.5-4 2-5 0z" stroke-width="1.5"/>
+        <path d="M16.5 6.6c-1.2 3.2-.9 6.8.9 9.9M23.5 6.6c1.2 3.2.9 6.8-.9 9.9M10.4 9.6c-.6 3.4.3 6.7 2.4 9M29.6 9.6c.6 3.4-.3 6.7-2.4 9" stroke-width="1.1"/>
+      </svg>
+      <span class="brand-name">La Croissanterie<small>Boulangerie · Pâtisserie</small></span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Open menu">
+      <span aria-hidden="true"></span>
+    </button>
+
+    <div class="nav-panel" id="nav-panel">
+      <ul class="nav-list">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#craft">Our Craft</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+      <div class="nav-panel-foot">
+        <p>2490 Trans-Canada Hwy<br>Mill Bay, BC V8H 1B5</p>
+        <p><a href="tel:+12509297277">(250) 929-7277</a></p>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-scrim" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+
+<!-- =====================================================================
+     Hero
+     ===================================================================== -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="label reveal">Boulangerie · Pâtisserie · Mill Bay</p>
+      <h1 id="hero-title" class="reveal" style="--d:80ms">Butter, flour, <em>patience.</em></h1>
+      <p class="hero-lead reveal" style="--d:160ms"><strong>Authentic French bakery</strong> in Mill Bay, British Columbia — croissants laminated by hand and baked fresh each morning.</p>
+
+      <a class="rating-badge reveal" style="--d:240ms" href="#reviews" aria-label="Rated 5.0 out of 5 from 21 Google reviews. Read reviews">
+        <span class="stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.5 6.6-.8z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.5 6.6-.8z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.5 6.6-.8z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.5 6.6-.8z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.5 6.6-.8z"/></svg>
+        </span>
+        <b>5.0</b>
+        <span>21 Google reviews</span>
+      </a>
+
+      <div class="hero-actions reveal" style="--d:320ms">
+        <a class="btn btn--solid" href="#menu">View Menu</a>
+        <a class="btn btn--ghost js-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=La+Croissanterie%2C+2490+Trans-Canada+Hwy%2C+Mill+Bay%2C+BC+V8H+1B5" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.6-7-12a7 7 0 0 1 14 0c0 4.4-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Get Directions<span class="sr-only"> (opens Google Maps in a new tab)</span>
+        </a>
+      </div>
+      <p class="hero-note reveal" style="--d:400ms">Fait main chaque matin</p>
+    </div>
+
+    <!-- Hero croissant: outline draws itself, then fills; steam wisps rise -->
+    <div class="hero-art">
+      <svg viewBox="0 0 420 320" class="art" role="img" aria-labelledby="hero-art-title">
+        <title id="hero-art-title">Line illustration of a golden croissant with steam rising</title>
+        <g class="steam" aria-hidden="true">
+          <path d="M170 92c-10-14 10-22 0-38s8-24 2-34"/>
+          <path d="M210 86c-10-16 12-24 0-42s8-26 2-36"/>
+          <path d="M250 92c-10-14 10-22 0-38s8-24 2-34"/>
+        </g>
+        <ellipse class="shadow" cx="210" cy="282" rx="150" ry="10" fill="rgba(43,29,20,.07)" stroke="none"/>
+        <g class="float">
+          <!-- Body fill (fades in after drawing) -->
+          <path class="fillg" d="M62 246C40 206 80 146 140 124c45-18 105-18 150 0 60 22 100 82 78 122-13 14-40 8-53-8-20-20-50-30-105-30s-85 10-105 30c-13 16-30 22-43 8z"/>
+          <!-- Outer contour -->
+          <path class="draw" style="--i:0" pathLength="1" d="M62 246C40 206 80 146 140 124c45-18 105-18 150 0 60 22 100 82 78 122-13 14-40 8-53-8-20-20-50-30-105-30s-85 10-105 30c-13 16-30 22-43 8z"/>
+          <!-- Laminated segments -->
+          <path class="draw" style="--i:1" pathLength="1" d="M180 111c-16 34-12 70 6 97"/>
+          <path class="draw" style="--i:2" pathLength="1" d="M250 111c16 34 12 70-6 97"/>
+          <path class="draw" style="--i:3" pathLength="1" d="M128 130c-8 30-1 60 18 84"/>
+          <path class="draw" style="--i:4" pathLength="1" d="M302 130c8 30 1 60-18 84"/>
+          <path class="draw" style="--i:5" pathLength="1" d="M86 164c-1 28 9 52 25 66"/>
+          <path class="draw" style="--i:6" pathLength="1" d="M344 164c1 28-9 52-25 66"/>
+          <!-- Fine flaky texture -->
+          <path class="draw fine" style="--i:7" pathLength="1" d="M196 132c8-3 30-3 38 0M192 152c10-3 36-3 46 0M194 172c10-2 32-2 42 0"/>
+          <path class="draw fine" style="--i:8" pathLength="1" d="M146 150c8-6 18-9 26-10M144 172c8-5 18-7 28-8M258 140c8 1 18 4 26 10M258 164c10 1 20 3 28 8"/>
+          <path class="draw fine" style="--i:9" pathLength="1" d="M100 186c6-4 12-6 18-7M312 179c6 1 12 3 18 7"/>
+        </g>
+      </svg>
+      <span class="hero-caption" aria-hidden="true">— le croissant</span>
+    </div>
+  </div>
+</section>
+
+<div class="wheat-divider" aria-hidden="true">
+  <svg viewBox="0 0 320 40" class="art reveal">
+    <path class="draw" pathLength="1" d="M0 20h118M202 20h118" stroke-width="1"/>
+    <path class="draw" pathLength="1" d="M128 20h66"/>
+    <g class="fine">
+      <ellipse class="draw" style="--i:1" pathLength="1" cx="140" cy="14.5" rx="6" ry="2.6" transform="rotate(-28 140 14.5)"/>
+      <ellipse class="draw" style="--i:1" pathLength="1" cx="140" cy="25.5" rx="6" ry="2.6" transform="rotate(28 140 25.5)"/>
+      <ellipse class="draw" style="--i:2" pathLength="1" cx="152" cy="14.5" rx="6" ry="2.6" transform="rotate(-28 152 14.5)"/>
+      <ellipse class="draw" style="--i:2" pathLength="1" cx="152" cy="25.5" rx="6" ry="2.6" transform="rotate(28 152 25.5)"/>
+      <ellipse class="draw" style="--i:3" pathLength="1" cx="164" cy="14.5" rx="6" ry="2.6" transform="rotate(-28 164 14.5)"/>
+      <ellipse class="draw" style="--i:3" pathLength="1" cx="164" cy="25.5" rx="6" ry="2.6" transform="rotate(28 164 25.5)"/>
+      <ellipse class="draw" style="--i:4" pathLength="1" cx="176" cy="14.5" rx="6" ry="2.6" transform="rotate(-28 176 14.5)"/>
+      <ellipse class="draw" style="--i:4" pathLength="1" cx="176" cy="25.5" rx="6" ry="2.6" transform="rotate(28 176 25.5)"/>
+      <ellipse class="draw" style="--i:5" pathLength="1" cx="190" cy="20" rx="6.5" ry="2.6"/>
+      <path class="draw" style="--i:6" pathLength="1" d="M196 20l12-4M196 20l12 4M141 13l-8-5M141 27l-8 5"/>
+    </g>
+  </svg>
+</div>
+
+<!-- =====================================================================
+     Our Craft
+     ===================================================================== -->
+<section class="section craft" id="craft" aria-labelledby="craft-title">
+  <div class="container">
+    <div class="craft-grid">
+      <div class="craft-copy">
+        <div class="section-head">
+          <p class="label reveal">01 — Notre savoir-faire</p>
+          <h2 id="craft-title" class="reveal" style="--d:80ms">The slow art of <em>lamination</em></h2>
+        </div>
+        <p class="dropcap reveal" style="--d:120ms">A true croissant can’t be hurried. Ours begin with cold butter folded into the dough by hand, then turned, rested, and turned again — the traditional French lamination that builds those delicate, honeycombed layers.</p>
+        <p class="reveal" style="--d:180ms">Nothing is rushed and nothing is faked. Each morning the ovens are lit and every tray is baked fresh, so what reaches the counter is crisp at the edges, tender at the heart and still fragrant with butter.</p>
+        <p class="reveal" style="--d:240ms">It is a quiet, old-fashioned way of working. We think you can taste the difference.</p>
+      </div>
+
+      <aside class="craft-aside reveal" style="--d:200ms" aria-label="Fait main chaque matin">
+        <!-- Rolling pin and whisk motif -->
+        <svg viewBox="0 0 180 120" class="art" aria-hidden="true">
+          <g transform="rotate(-18 90 60)">
+            <rect class="draw" style="--i:0" pathLength="1" x="42" y="50" width="96" height="20" rx="10"/>
+            <path class="draw" style="--i:1" pathLength="1" d="M42 60H22M138 60h20"/>
+            <rect class="draw" style="--i:2" pathLength="1" x="8" y="55" width="16" height="10" rx="5"/>
+            <rect class="draw" style="--i:2" pathLength="1" x="156" y="55" width="16" height="10" rx="5"/>
+            <path class="draw fine" style="--i:3" pathLength="1" d="M62 52v16M118 52v16"/>
+          </g>
+          <g transform="rotate(32 100 64)" class="ink fine">
+            <path class="draw" style="--i:4" pathLength="1" d="M100 104V74" stroke="var(--espresso)" stroke-width="2" opacity="1"/>
+            <path class="draw" style="--i:5" pathLength="1" d="M100 74c-14-8-16-40 0-54 16 14 14 46 0 54z" stroke="var(--espresso)"/>
+            <path class="draw" style="--i:6" pathLength="1" d="M100 74c-6-10-6-38 0-54 6 16 6 44 0 54z" stroke="var(--espresso)"/>
+          </g>
+        </svg>
+        <blockquote>“Fait main chaque matin.”<span>Made by hand, every morning</span></blockquote>
+      </aside>
+    </div>
+
+    <ul class="pillars" data-stagger>
+      <li class="pillar reveal">
+        <svg viewBox="0 0 48 48" class="art" role="img" aria-label="Folded dough layers icon">
+          <path class="draw" style="--i:0" pathLength="1" d="M7 15c9-4 25-4 34 0"/>
+          <path class="draw" style="--i:1" pathLength="1" d="M7 23c9-4 25-4 34 0"/>
+          <path class="draw" style="--i:2" pathLength="1" d="M7 31c9-4 25-4 34 0"/>
+          <path class="draw" style="--i:3" pathLength="1" d="M41 15c5 3 5 13 0 16"/>
+          <path class="draw fine" style="--i:4" pathLength="1" d="M10 38h28"/>
+        </svg>
+        <div><h3>Hand-laminated</h3><p>Butter folded into the dough by hand, turn after patient turn.</p></div>
+      </li>
+      <li class="pillar reveal">
+        <svg viewBox="0 0 48 48" class="art" role="img" aria-label="Morning sun icon">
+          <path class="draw" style="--i:0" pathLength="1" d="M5 32h38"/>
+          <path class="draw" style="--i:1" pathLength="1" d="M14 32a10 10 0 0 1 20 0"/>
+          <path class="draw fine" style="--i:2" pathLength="1" d="M24 12v5M10 18l3.5 3.5M38 18l-3.5 3.5M5 26h4M39 26h4"/>
+          <path class="draw fine" style="--i:3" pathLength="1" d="M12 38h24"/>
+        </svg>
+        <div><h3>Baked daily</h3><p>Every tray comes out of the oven fresh each morning.</p></div>
+      </li>
+      <li class="pillar reveal">
+        <svg viewBox="0 0 48 48" class="art" role="img" aria-label="Block of butter icon">
+          <path class="draw" style="--i:0" pathLength="1" d="M7 25l17-8 17 8-17 8z"/>
+          <path class="draw" style="--i:1" pathLength="1" d="M7 25v7l17 8 17-8v-7M24 33v7"/>
+          <path class="draw fine" style="--i:2" pathLength="1" d="M17 23c3-4 9-4 11-1 1 2-1 4-3 3"/>
+        </svg>
+        <div><h3>Real butter</h3><p>The rich, golden flavour at the heart of every true French croissant.</p></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- =====================================================================
+     Menu
+     OWNER: replace each "X" in the price spans with the real starting price.
+     ===================================================================== -->
+<section class="section menu" id="menu" aria-labelledby="menu-title">
+  <div class="container">
+    <div class="section-head menu-head">
+      <div>
+        <p class="label reveal">02 — La carte</p>
+        <h2 id="menu-title" class="reveal" style="--d:80ms">From our <em>ovens</em></h2>
+      </div>
+      <p class="menu-note reveal" style="--d:160ms">
+        <svg viewBox="0 0 24 24" class="art" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        The selection changes daily — come early for the full range.
+      </p>
+    </div>
+
+    <ul class="menu-grid" data-stagger>
+      <!-- Classic butter croissant (featured) -->
+      <li class="card card--feature reveal">
+        <div class="card-art">
+          <svg viewBox="0 0 420 300" class="art" role="img" aria-label="Illustration of a classic butter croissant">
+            <path class="fillg" d="M62 246C40 206 80 146 140 124c45-18 105-18 150 0 60 22 100 82 78 122-13 14-40 8-53-8-20-20-50-30-105-30s-85 10-105 30c-13 16-30 22-43 8z"/>
+            <path class="draw" style="--i:0" pathLength="1" stroke-width="2.4" d="M62 246C40 206 80 146 140 124c45-18 105-18 150 0 60 22 100 82 78 122-13 14-40 8-53-8-20-20-50-30-105-30s-85 10-105 30c-13 16-30 22-43 8z"/>
+            <path class="draw" style="--i:1" pathLength="1" stroke-width="2.2" d="M180 111c-16 34-12 70 6 97M250 111c16 34 12 70-6 97"/>
+            <path class="draw" style="--i:2" pathLength="1" stroke-width="2.2" d="M128 130c-8 30-1 60 18 84M302 130c8 30 1 60-18 84"/>
+            <path class="draw" style="--i:3" pathLength="1" stroke-width="2.2" d="M86 164c-1 28 9 52 25 66M344 164c1 28-9 52-25 66"/>
+            <path class="draw fine" style="--i:4" pathLength="1" stroke-width="1.4" d="M196 132c8-3 30-3 38 0M192 152c10-3 36-3 46 0M194 172c10-2 32-2 42 0"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <span class="tag">Classique</span>
+          <p class="fr">Croissant au beurre</p>
+          <h3>Classic Butter Croissant</h3>
+          <p class="desc">The benchmark of any French bakery: a crisp, shattering crust giving way to a tender, honeycombed crumb. Simple, and exactly as it should be.</p>
+          <div class="card-foot"><span>Viennoiserie</span><span class="price">From $<span class="ph">X</span></span></div>
+        </div>
+      </li>
+
+      <!-- Pain au chocolat -->
+      <li class="card reveal">
+        <div class="card-art">
+          <svg viewBox="0 0 220 150" class="art" role="img" aria-label="Illustration of a pain au chocolat">
+            <path class="fillg" d="M34 58c0-12 10-20 22-20h108c12 0 22 8 22 20v34c0 12-10 20-22 20H56c-12 0-22-8-22-20z"/>
+            <path class="draw" style="--i:0" pathLength="1" d="M34 58c0-12 10-20 22-20h108c12 0 22 8 22 20v34c0 12-10 20-22 20H56c-12 0-22-8-22-20z"/>
+            <path class="draw" style="--i:1" pathLength="1" d="M40 56c40-8 100-8 140 0"/>
+            <path class="draw" style="--i:2" pathLength="1" d="M36 76c44-7 104-7 148 0"/>
+            <path class="draw" style="--i:3" pathLength="1" d="M38 96c44-6 100-6 144 0"/>
+            <path class="draw fine" style="--i:4" pathLength="1" d="M70 46c8-2 18-2 26 0M120 46c8-2 18-2 26 0M78 66c10-2 22-2 32 0M126 86c10-2 22-2 32 0"/>
+            <rect class="choc" style="--i:5" pathLength="1" x="27" y="62" width="10" height="7" rx="1.5"/>
+            <rect class="choc" pathLength="1" x="27" y="82" width="10" height="7" rx="1.5"/>
+            <rect class="choc" pathLength="1" x="183" y="62" width="10" height="7" rx="1.5"/>
+            <rect class="choc" pathLength="1" x="183" y="82" width="10" height="7" rx="1.5"/>
+          </svg>
+        </div>
+        <p class="fr">Pain au chocolat</p>
+        <h3>Chocolate Croissant</h3>
+        <p class="desc">Chocolate tucked inside buttery, laminated layers and baked until deeply golden. A customer favourite.</p>
+        <div class="card-foot"><span>Viennoiserie</span><span class="price">From $<span class="ph">X</span></span></div>
+      </li>
+
+      <!-- Ham & cheese croissant -->
+      <li class="card reveal">
+        <div class="card-art">
+          <svg viewBox="0 0 420 300" class="art" role="img" aria-label="Illustration of a ham and cheese croissant">
+            <path class="fillg" d="M62 246C40 206 80 146 140 124c45-18 105-18 150 0 60 22 100 82 78 122-13 14-40 8-53-8-20-20-50-30-105-30s-85 10-105 30c-13 16-30 22-43 8z"/>
+            <path class="draw" style="--i:0" pathLength="1" stroke-width="2.6" d="M62 246C40 206 80 146 140 124c45-18 105-18 150 0 60 22 100 82 78 122-13 14-40 8-53-8-20-20-50-30-105-30s-85 10-105 30c-13 16-30 22-43 8z"/>
+            <path class="draw" style="--i:1" pathLength="1" stroke-width="2.4" d="M180 111c-16 34-12 70 6 97M250 111c16 34 12 70-6 97"/>
+            <path class="draw" style="--i:2" pathLength="1" stroke-width="2.4" d="M128 130c-8 30-1 60 18 84M302 130c8 30 1 60-18 84"/>
+            <!-- Melted cheese and a fold of ham -->
+            <path class="draw ink" style="--i:3" pathLength="1" stroke-width="2.2" d="M150 210c10-6 18 0 18 12 0 8 8 8 10 0 3-10 14-12 22-6 6 5 10 16 16 6 6-12 18-10 26-2 4 4 10 8 14 0"/>
+            <path class="draw" style="--i:4" pathLength="1" stroke-width="2" stroke="var(--blue)" d="M166 206c18-8 70-8 90 0"/>
+            <path class="draw fine" style="--i:5" pathLength="1" stroke-width="1.6" d="M196 136c8-3 30-3 38 0M192 158c10-3 36-3 46 0"/>
+          </svg>
+        </div>
+        <p class="fr">Croissant jambon-fromage</p>
+        <h3>Ham &amp; Cheese Croissant</h3>
+        <p class="desc">Savoury ham and melting cheese wrapped in flaky, golden layers — breakfast and lunch in one.</p>
+        <div class="card-foot"><span>Salé</span><span class="price">From $<span class="ph">X</span></span></div>
+      </li>
+
+      <!-- Savory twist -->
+      <li class="card reveal">
+        <div class="card-art">
+          <svg viewBox="0 0 220 150" class="art" role="img" aria-label="Illustration of a savory pastry twist">
+            <g transform="rotate(-12 110 75)">
+              <ellipse class="fillg" cx="110" cy="75" rx="84" ry="18"/>
+              <ellipse class="draw" style="--i:0" pathLength="1" cx="44"  cy="75" rx="14" ry="22" transform="rotate(32 44 75)"/>
+              <ellipse class="draw" style="--i:1" pathLength="1" cx="66"  cy="75" rx="14" ry="24" transform="rotate(32 66 75)"/>
+              <ellipse class="draw" style="--i:2" pathLength="1" cx="88"  cy="75" rx="14" ry="25" transform="rotate(32 88 75)"/>
+              <ellipse class="draw" style="--i:3" pathLength="1" cx="110" cy="75" rx="14" ry="26" transform="rotate(32 110 75)"/>
+              <ellipse class="draw" style="--i:4" pathLength="1" cx="132" cy="75" rx="14" ry="25" transform="rotate(32 132 75)"/>
+              <ellipse class="draw" style="--i:5" pathLength="1" cx="154" cy="75" rx="14" ry="24" transform="rotate(32 154 75)"/>
+              <ellipse class="draw" style="--i:6" pathLength="1" cx="176" cy="75" rx="14" ry="22" transform="rotate(32 176 75)"/>
+              <path class="draw ink fine" style="--i:7" pathLength="1" stroke-width="2" d="M60 60h.01M84 92h.01M104 58h.01M126 90h.01M150 60h.01M168 88h.01M72 78h.01M140 76h.01"/>
+            </g>
+          </svg>
+        </div>
+        <p class="fr">Torsade salée</p>
+        <h3>Savory Twist</h3>
+        <p class="desc">A twisted ribbon of laminated pastry, savoury and crisp at every turn.</p>
+        <div class="card-foot"><span>Salé</span><span class="price">From $<span class="ph">X</span></span></div>
+      </li>
+
+      <!-- Nordic cinnamon bun -->
+      <li class="card reveal">
+        <div class="card-art">
+          <svg viewBox="0 0 220 150" class="art" role="img" aria-label="Illustration of a Nordic cinnamon bun">
+            <circle class="fillg" cx="110" cy="75" r="50"/>
+            <path class="draw" style="--i:0" pathLength="1" d="M60 75c0-30 22-50 50-50 30 0 52 22 50 52-2 28-24 48-52 48-28 0-48-22-48-50z"/>
+            <!-- Spiral of cinnamon -->
+            <path class="draw ink" style="--i:1" pathLength="1" stroke-width="1.5"
+                  d="M108 75a4 4 0 0 1 8 0a8 8 0 0 1-16 0a12 12 0 0 1 24 0a16 16 0 0 1-32 0a20 20 0 0 1 40 0a24 24 0 0 1-48 0a28 28 0 0 1 56 0a32 32 0 0 1-64 0a36 36 0 0 1 72 0"/>
+            <path class="draw fine" style="--i:2" pathLength="1" d="M88 46h.01M132 52h.01M150 90h.01M80 104h.01M118 112h.01M70 70h.01" stroke-width="2.4"/>
+          </svg>
+        </div>
+        <p class="fr">Brioche nordique à la cannelle</p>
+        <h3>Nordic Cinnamon Bun</h3>
+        <p class="desc">Soft, fragrant swirls of cinnamon — a Nordic tradition, by way of a French oven.</p>
+        <div class="card-foot"><span>Douceur</span><span class="price">From $<span class="ph">X</span></span></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- =====================================================================
+     Reviews
+     ===================================================================== -->
+<section class="section reviews" id="reviews" aria-labelledby="reviews-title">
+  <div class="container">
+    <div class="section-head">
+      <p class="label reveal">03 — Ce qu’on en dit</p>
+      <h2 id="reviews-title" class="reveal" style="--d:80ms">Kind <em>words</em></h2>
+    </div>
+
+    <div class="review-summary reveal" style="--d:140ms">
+      <span class="score">5.0</span>
+      <span class="stars" role="img" aria-label="5 out of 5 stars">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.5 6.6-.8z"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.5 6.6-.8z"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.5 6.6-.8z"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.5 6.6-.8z"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.5 6.6-.8z"/></svg>
+      </span>
+      <span>21 Google reviews</span>
+      <span class="sep" aria-hidden="true"></span>
+      <span>5/5 on Facebook</span>
+    </div>
+
+    <div class="carousel reveal" style="--d:200ms" role="region" aria-roledescription="carousel" aria-label="Customer reviews" tabindex="0">
+      <svg class="quote-mark" viewBox="0 0 54 40" aria-hidden="true"><path d="M0 40V24C0 10 7 2 21 0l2 5c-8 2-12 7-12 14h10v21zm31 0V24c0-14 7-22 21-24l2 5c-8 2-12 7-12 14h10v21z"/></svg>
+      <div class="slides" aria-live="off">
+        <figure class="slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 3">
+          <blockquote><p>“Ham and cheese croissant might be the best thing I’ve ever put in my mouth.”</p></blockquote>
+          <figcaption>Google review</figcaption>
+        </figure>
+        <figure class="slide" role="group" aria-roledescription="slide" aria-label="2 of 3">
+          <blockquote><p>“That chocolate croissant was the best piece of pastry I’ve ever had in my life.”</p></blockquote>
+          <figcaption>Google review</figcaption>
+        </figure>
+        <figure class="slide" role="group" aria-roledescription="slide" aria-label="3 of 3">
+          <blockquote><p>“The Nordic cinnamon bun was the bomb!”</p></blockquote>
+          <figcaption>Google review</figcaption>
+        </figure>
+      </div>
+
+      <div class="carousel-controls">
+        <button class="arrow" type="button" data-dir="-1" aria-label="Previous review">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <div class="dots">
+          <button class="dot" type="button" aria-label="Show review 1" aria-current="true"></button>
+          <button class="dot" type="button" aria-label="Show review 2"></button>
+          <button class="dot" type="button" aria-label="Show review 3"></button>
+        </div>
+        <button class="arrow" type="button" data-dir="1" aria-label="Next review">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     Visit
+     ===================================================================== -->
+<section class="section visit" id="visit" aria-labelledby="visit-title">
+  <div class="container visit-grid">
+    <div class="visit-info">
+      <div class="section-head" style="margin-bottom:0">
+        <p class="label reveal">04 — Nous trouver</p>
+        <h2 id="visit-title" class="reveal" style="--d:80ms">Come say <em>bonjour</em></h2>
+      </div>
+
+      <div class="reveal" style="--d:120ms">
+        <p class="status is-unknown" id="open-status" role="status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="status-text">Opens at 8 a.m.</span>
+        </p>
+      </div>
+
+      <div class="info-row reveal" style="--d:160ms">
+        <!-- Mill Bay location icon -->
+        <svg viewBox="0 0 48 48" class="art" aria-hidden="true">
+          <path class="draw" pathLength="1" d="M24 44S10 28 10 18a14 14 0 0 1 28 0c0 10-14 26-14 26z"/>
+          <circle class="draw" style="--i:1" pathLength="1" cx="24" cy="18" r="5"/>
+        </svg>
+        <div>
+          <h3>Address</h3>
+          <address>2490 Trans-Canada Hwy<br>Mill Bay, BC V8H 1B5</address>
+        </div>
+      </div>
+
+      <div class="info-row reveal" style="--d:200ms">
+        <svg viewBox="0 0 48 48" class="art" aria-hidden="true">
+          <path class="draw" pathLength="1" d="M14 6h7l3 9-5 3c2 5 6 9 11 11l3-5 9 3v7c0 3-3 6-6 6C21 40 8 27 8 12c0-3 3-6 6-6z"/>
+        </svg>
+        <div>
+          <h3>Telephone</h3>
+          <p><a class="tel" href="tel:+12509297277">(250) 929-7277</a></p>
+        </div>
+      </div>
+
+      <div class="info-row reveal" style="--d:240ms">
+        <svg viewBox="0 0 48 48" class="art" aria-hidden="true">
+          <circle class="draw" pathLength="1" cx="24" cy="24" r="16"/>
+          <path class="draw" style="--i:1" pathLength="1" d="M29 18c-1-2-3-3-5-3-3 0-5 2-5 4 0 6 11 3 11 9 0 2-2 4-6 4-2 0-4-1-5-3M24 12v3M24 32v4"/>
+        </svg>
+        <div>
+          <h3>Price range</h3>
+          <p>$1–10 per person</p>
+        </div>
+      </div>
+
+      <!--
+        OWNER: opening hours.
+        Edit only the data attributes on each row; the visible text and the
+        "Open now / Closed" badge are generated from them automatically.
+          data-open="08:00"    opening time, 24-hour HH:MM
+          data-close="15:30"   closing time, 24-hour HH:MM (leave empty if unknown)
+          data-closed="true"   add this to mark a day the bakery is closed
+        data-day uses 0 = Sunday … 6 = Saturday. Once all closing times are
+        filled in, you can remove the "Placeholder" badge and note below.
+      -->
+      <div class="hours-wrap reveal" style="--d:280ms">
+        <div class="hours-head">
+          <h3>Hours</h3>
+          <span class="ph-badge">Placeholder · to be confirmed</span>
+        </div>
+        <table class="hours" id="hours-table">
+          <caption class="sr-only">Opening hours (placeholder, to be confirmed by the bakery)</caption>
+          <tbody>
+            <tr data-day="1" data-open="08:00" data-close=""><th scope="row">Monday</th><td>8:00 a.m. – TBC</td></tr>
+            <tr data-day="2" data-open="08:00" data-close=""><th scope="row">Tuesday</th><td>8:00 a.m. – TBC</td></tr>
+            <tr data-day="3" data-open="08:00" data-close=""><th scope="row">Wednesday</th><td>8:00 a.m. – TBC</td></tr>
+            <tr data-day="4" data-open="08:00" data-close=""><th scope="row">Thursday</th><td>8:00 a.m. – TBC</td></tr>
+            <tr data-day="5" data-open="08:00" data-close=""><th scope="row">Friday</th><td>8:00 a.m. – TBC</td></tr>
+            <tr data-day="6" data-open="08:00" data-close=""><th scope="row">Saturday</th><td>8:00 a.m. – TBC</td></tr>
+            <tr data-day="0" data-open="08:00" data-close=""><th scope="row">Sunday</th><td>8:00 a.m. – TBC</td></tr>
+          </tbody>
+        </table>
+        <p class="hours-note">We open at 8 a.m. Full weekly hours are coming soon — please call ahead to confirm.</p>
+      </div>
+
+      <div class="visit-actions reveal" style="--d:320ms">
+        <a class="btn btn--solid js-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=La+Croissanterie%2C+2490+Trans-Canada+Hwy%2C+Mill+Bay%2C+BC+V8H+1B5" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.6-7-12a7 7 0 0 1 14 0c0 4.4-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Get Directions<span class="sr-only"> (opens Google Maps in a new tab)</span>
+        </a>
+        <a class="btn btn--ghost" href="tel:+12509297277">Call us</a>
+      </div>
+    </div>
+
+    <!-- Stylised map card -->
+    <a class="map-card reveal" style="--d:200ms" href="https://www.google.com/maps/search/?api=1&amp;query=La+Croissanterie%2C+2490+Trans-Canada+Hwy%2C+Mill+Bay%2C+BC+V8H+1B5" target="_blank" rel="noopener" aria-label="Stylised map of La Croissanterie at 2490 Trans-Canada Highway, Mill Bay. Opens Google Maps in a new tab">
+      <svg viewBox="0 0 400 300" aria-hidden="true">
+        <defs>
+          <pattern id="map-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M20 0H0v20" fill="none" stroke="rgba(43,29,20,.05)" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect width="400" height="300" fill="#EFE5D3"/>
+        <rect width="400" height="300" fill="url(#map-grid)"/>
+        <!-- Abstract shoreline -->
+        <path d="M300 0c-10 40 20 70 6 110-12 34-48 50-40 92 6 34 40 60 46 98H400V0z" fill="rgba(94,117,145,.16)"/>
+        <g fill="none" stroke="rgba(94,117,145,.45)" stroke-width="1" stroke-linecap="round">
+          <path d="M332 60c6-3 12-3 18 0s12 3 18 0"/>
+          <path d="M318 170c6-3 12-3 18 0s12 3 18 0"/>
+          <path d="M340 240c6-3 12-3 18 0s12 3 18 0"/>
+        </g>
+        <!-- Woods -->
+        <g fill="rgba(111,131,100,.28)">
+          <circle cx="48" cy="62" r="14"/><circle cx="70" cy="50" r="10"/><circle cx="64" cy="76" r="9"/>
+          <circle cx="90" cy="232" r="13"/><circle cx="112" cy="246" r="9"/><circle cx="72" cy="252" r="8"/>
+          <circle cx="250" cy="40" r="10"/><circle cx="232" cy="30" r="7"/>
+        </g>
+        <!-- Minor roads -->
+        <g fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round">
+          <path d="M0 150c60 6 120-6 170-20"/>
+          <path d="M226 132c26 12 42 40 54 80"/>
+          <path d="M120 0c10 50 30 80 60 110"/>
+        </g>
+        <g fill="none" stroke="rgba(43,29,20,.12)" stroke-width="1">
+          <path d="M0 150c60 6 120-6 170-20"/>
+          <path d="M226 132c26 12 42 40 54 80"/>
+          <path d="M120 0c10 50 30 80 60 110"/>
+        </g>
+        <!-- Trans-Canada Hwy -->
+        <path id="hwy" d="M140 300C160 230 190 170 205 120S236 30 250 0" fill="none" stroke="#C8923A" stroke-width="12" stroke-linecap="round" opacity=".55"/>
+        <path d="M140 300C160 230 190 170 205 120S236 30 250 0" fill="none" stroke="#F7F1E6" stroke-width="1.2" stroke-dasharray="6 7"/>
+        <text font-family="Jost, sans-serif" font-size="9" letter-spacing="2.5" fill="#5A4636">
+          <textPath href="#hwy" startOffset="8%">TRANS-CANADA HWY</textPath>
+        </text>
+        <!-- Pin -->
+        <circle class="map-pin-ring" cx="200" cy="132" r="18" fill="none" stroke="#C8923A" stroke-width="1.5"/>
+        <path d="M200 140s-16-17-16-28a16 16 0 0 1 32 0c0 11-16 28-16 28z" fill="#2B1D14" transform="translate(0 -8)"/>
+        <circle cx="200" cy="104" r="5.5" fill="#C8923A"/>
+        <!-- Label -->
+        <g transform="translate(220 150)">
+          <rect x="0" y="0" width="150" height="40" rx="2" fill="#F7F1E6" stroke="rgba(43,29,20,.18)"/>
+          <text x="12" y="18" font-family="Cormorant Garamond, Georgia, serif" font-size="15" font-weight="600" fill="#2B1D14">La Croissanterie</text>
+          <text x="12" y="31" font-family="Jost, sans-serif" font-size="8" letter-spacing="1.6" fill="#8C5F17">2490 TRANS-CANADA HWY</text>
+        </g>
+        <!-- Compass -->
+        <g transform="translate(40 268)" fill="none" stroke="#5A4636" stroke-width="1">
+          <circle r="12" opacity=".5"/>
+          <path d="M0-9l3 9-3 9-3-9z" fill="#C8923A" stroke="none"/>
+          <text y="-16" text-anchor="middle" font-family="Jost, sans-serif" font-size="8" fill="#5A4636" stroke="none">N</text>
+        </g>
+      </svg>
+      <div class="map-caption"><span>Mill Bay · British Columbia</span><span>Open in Maps →</span></div>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- =====================================================================
+     Footer
+     ===================================================================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a class="brand" href="#top" aria-label="La Croissanterie, back to top">
+          <svg viewBox="0 0 40 28" class="art" aria-hidden="true">
+            <path d="M5 21C3 15 8 8 15 6.5c3-.7 7-.7 10 0C32 8 37 15 35 21c-1 2-4 1.5-5 0-2-3-6-4.5-10-4.5S12 18 10 21c-1 1.5-4 2-5 0z" stroke-width="1.5"/>
+            <path d="M16.5 6.6c-1.2 3.2-.9 6.8.9 9.9M23.5 6.6c1.2 3.2.9 6.8-.9 9.9M10.4 9.6c-.6 3.4.3 6.7 2.4 9M29.6 9.6c.6 3.4-.3 6.7-2.4 9" stroke-width="1.1"/>
+          </svg>
+          <span class="brand-name">La Croissanterie<small>Authentic French bakery</small></span>
+        </a>
+        <p class="footer-sign" style="margin-top:1.6rem">Fait avec amour à Mill Bay</p>
+      </div>
+      <div class="footer-col">
+        <h3>Visit</h3>
+        <address>2490 Trans-Canada Hwy<br>Mill Bay, BC V8H 1B5</address>
+      </div>
+      <div class="footer-col">
+        <h3>Call</h3>
+        <p><a href="tel:+12509297277">(250) 929-7277</a></p>
+        <p style="margin-top:.8rem">Doors open at 8 a.m.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> La Croissanterie. All rights reserved.</span>
+      <span>Boulangerie · Pâtisserie</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* ------------------------------------------------------------------
+     1. Header: soft background once the page scrolls
+     ------------------------------------------------------------------ */
+  var header = document.querySelector('.site-header');
+  function onScroll() { header.classList.toggle('is-scrolled', window.scrollY > 12); }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ------------------------------------------------------------------
+     2. Mobile navigation (slide-in panel)
+     ------------------------------------------------------------------ */
+  var toggle = document.querySelector('.nav-toggle');
+  var scrim  = document.querySelector('.nav-scrim');
+  var root   = document.documentElement;
+
+  function setNav(open) {
+    root.classList.toggle('nav-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) { var first = document.querySelector('.nav-list a'); if (first) first.focus(); }
+  }
+  toggle.addEventListener('click', function () { setNav(!root.classList.contains('nav-open')); });
+  scrim.addEventListener('click', function () { setNav(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && root.classList.contains('nav-open')) { setNav(false); toggle.focus(); }
+  });
+  document.querySelectorAll('.nav-panel a').forEach(function (a) {
+    a.addEventListener('click', function () { if (root.classList.contains('nav-open')) setNav(false); });
+  });
+  window.matchMedia('(min-width: 900px)').addEventListener('change', function (e) { if (e.matches) setNav(false); });
+
+  /* ------------------------------------------------------------------
+     3. Scroll reveals (IntersectionObserver, staggered within groups)
+     ------------------------------------------------------------------ */
+  document.querySelectorAll('[data-stagger]').forEach(function (group) {
+    Array.prototype.forEach.call(group.children, function (el, i) { el.style.setProperty('--d', (i * 110) + 'ms'); });
+  });
+
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !reduceMotion.matches) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('is-visible'); });
+  }
+
+  /* ------------------------------------------------------------------
+     4. Reviews carousel: slow auto-advance, fade, pause on hover/focus
+     ------------------------------------------------------------------ */
+  var carousel = document.querySelector('.carousel');
+  if (carousel) {
+    var slides   = carousel.querySelectorAll('.slide');
+    var dots     = carousel.querySelectorAll('.dot');
+    var live     = carousel.querySelector('.slides');
+    var current  = 0;
+    var timer    = null;
+    var paused   = false;
+    var DELAY    = 7000;
+
+    function show(n, fromUser) {
+      current = (n + slides.length) % slides.length;
+      slides.forEach(function (s, i) {
+        var active = i === current;
+        s.classList.toggle('is-active', active);
+        s.setAttribute('aria-hidden', String(!active));
+      });
+      dots.forEach(function (d, i) {
+        if (i === current) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+      });
+      // Announce changes only when the visitor drives the carousel
+      live.setAttribute('aria-live', fromUser ? 'polite' : 'off');
+    }
+    function start() {
+      stop();
+      if (reduceMotion.matches || paused) return;
+      timer = setInterval(function () { show(current + 1, false); }, DELAY);
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+    carousel.querySelectorAll('.arrow').forEach(function (btn) {
+      btn.addEventListener('click', function () { show(current + Number(btn.dataset.dir), true); start(); });
+    });
+    dots.forEach(function (dot, i) {
+      dot.addEventListener('click', function () { show(i, true); start(); });
+    });
+    carousel.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); show(current + 1, true); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); show(current - 1, true); }
+    });
+    carousel.addEventListener('mouseenter', function () { paused = true; stop(); });
+    carousel.addEventListener('mouseleave', function () { paused = false; start(); });
+    carousel.addEventListener('focusin',    function () { paused = true; stop(); });
+    carousel.addEventListener('focusout',   function (e) {
+      if (!carousel.contains(e.relatedTarget)) { paused = false; start(); }
+    });
+    document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+
+    show(0, false);
+    start();
+  }
+
+  /* ------------------------------------------------------------------
+     5. Opening hours & "Open now / Closed" (America/Vancouver time)
+     ------------------------------------------------------------------ */
+  var DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var rows = document.querySelectorAll('#hours-table tr[data-day]');
+  var statusEl = document.getElementById('open-status');
+
+  function toMinutes(hhmm) {
+    if (!hhmm) return null;
+    var m = /^(\d{1,2}):(\d{2})$/.exec(hhmm.trim());
+    return m ? Number(m[1]) * 60 + Number(m[2]) : null;
+  }
+  function formatTime(mins) {
+    var h = Math.floor(mins / 60), m = mins % 60;
+    var suffix = h >= 12 ? 'p.m.' : 'a.m.';
+    var h12 = h % 12 === 0 ? 12 : h % 12;
+    return h12 + ':' + (m < 10 ? '0' : '') + m + ' ' + suffix;
+  }
+  function vancouverNow() {
+    var parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/Vancouver', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+    }).formatToParts(new Date());
+    var get = function (t) { return parts.find(function (p) { return p.type === t; }).value; };
+    var day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(get('weekday'));
+    var hour = Number(get('hour')) % 24;
+    return { day: day, minutes: hour * 60 + Number(get('minute')) };
+  }
+
+  // Read the schedule from the table and render each row's text from it
+  var schedule = {};
+  rows.forEach(function (row) {
+    var entry = {
+      closed: row.dataset.closed === 'true',
+      open: toMinutes(row.dataset.open),
+      close: toMinutes(row.dataset.close)
+    };
+    schedule[Number(row.dataset.day)] = entry;
+    var cell = row.querySelector('td');
+    if (entry.closed) cell.textContent = 'Closed';
+    else if (entry.open != null) cell.textContent = formatTime(entry.open) + ' – ' + (entry.close != null ? formatTime(entry.close) : 'TBC');
+  });
+
+  function nextOpening(fromDay) {
+    for (var i = 1; i <= 7; i++) {
+      var d = (fromDay + i) % 7, e = schedule[d];
+      if (e && !e.closed && e.open != null) {
+        return (i === 1 ? 'tomorrow' : DAY_NAMES[d]) + ' at ' + formatTime(e.open);
+      }
+    }
+    return null;
+  }
+
+  function updateStatus() {
+    if (!statusEl) return;
+    var now = vancouverNow();
+    var today = schedule[now.day];
+    var state, text;
+
+    rows.forEach(function (row) { row.classList.toggle('is-today', Number(row.dataset.day) === now.day); });
+
+    if (!today || today.closed || today.open == null) {
+      var next = nextOpening(now.day);
+      state = 'closed';
+      text = 'Closed today' + (next ? ' · Opens ' + next : '');
+    } else if (now.minutes < today.open) {
+      state = 'closed';
+      text = 'Closed · Opens today at ' + formatTime(today.open);
+    } else if (today.close == null) {
+      // Closing time not yet published by the bakery
+      state = 'unknown';
+      text = 'Opened at ' + formatTime(today.open) + ' · Call to confirm closing time';
+    } else if (now.minutes < today.close) {
+      state = 'open';
+      text = 'Open now · Until ' + formatTime(today.close);
+    } else {
+      var n = nextOpening(now.day);
+      state = 'closed';
+      text = 'Closed' + (n ? ' · Opens ' + n : '');
+    }
+
+    statusEl.className = 'status is-' + state;
+    statusEl.querySelector('.status-text').textContent = text;
+  }
+  updateStatus();
+  setInterval(updateStatus, 60 * 1000);
+
+  /* ------------------------------------------------------------------
+     6. Footer year
+     ------------------------------------------------------------------ */
+  var year = document.getElementById('year');
+  if (year) year.textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
